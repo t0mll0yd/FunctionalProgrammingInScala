@@ -1,4 +1,5 @@
 import chapter3.{CustomCons, CustomList, CustomNil}
+import CustomList.foldRight
 
 import scala.annotation.tailrec
 
@@ -15,3 +16,6 @@ def foldLeft[A, B](as: CustomList[A], z: B)(f: (B, A) => B): B = as match {
   case CustomNil => z
   case CustomCons(x, xs) => foldLeft(xs, f(z, x))(f)
 }
+
+foldLeft(CustomList(1, 2, 3), 0)(_ - _) // ((0 - 1) - 2) - 3 = -6
+foldRight(CustomList(1, 2, 3), 0)(_ - _) // 1 - (2 - (3 - 0)) = 2
