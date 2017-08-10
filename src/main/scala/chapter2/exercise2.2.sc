@@ -1,9 +1,9 @@
+import scala.annotation.tailrec
+
 /*
 Implement isSorted, which checks whether an Array[A]
 is sorted according to a given comparison function
 */
-
-import scala.annotation.tailrec
 
 // Curried for better type inference
 @tailrec
