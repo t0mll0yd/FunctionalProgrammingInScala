@@ -20,6 +20,14 @@ object CustomList {
     case CustomCons(x, xs) => foldLeft(xs, f(z, x))(f)
   }
 
+  // See exercise 3.13
+  def foldRightTailRec[A, B](as: CustomList[A], z: B)(f: (A, B) => B): B =
+    foldLeft(reverse(as), z)((b, a) => f(a, b))
+
+  // See exercise 3.12
+  def reverse[A](as: CustomList[A]): CustomList[A] =
+    foldLeft(as, CustomNil: CustomList[A])((b, a) => CustomCons(a, b))
+
   def sum(ints: CustomList[Int]): Int = ints match {
     case CustomCons(x, xs) => x + sum(xs)
     case CustomNil => 0

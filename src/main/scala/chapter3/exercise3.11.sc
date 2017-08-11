@@ -15,7 +15,7 @@ sum(CustomList(2, 3, 4)) // 9
 
 def product(as: CustomList[Int]): Int = foldLeft(as, 1)(_ * _)
 
-product(CustomList(2, 3, 4))// 24
+product(CustomList(2, 3, 4)) // 24
 
 // Length
 
