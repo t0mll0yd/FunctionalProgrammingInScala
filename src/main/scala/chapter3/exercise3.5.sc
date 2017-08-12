@@ -12,6 +12,6 @@ def dropWhile[A](l: CustomList[A], p: A => Boolean): CustomList[A] = l match {
   case CustomNil => CustomNil
 }
 
-dropWhile(CustomNil, _ => true) // CustomNil
+dropWhile[Int](CustomNil, _ => true) // CustomNil
 dropWhile(CustomList(1, 2, 3), (a: Int) => a % 2 == 1) // CustomList(2, 3)
-dropWhile(CustomList(1, 2, 3), (a: Int) => a % 2 == 0) // CustomNil
+dropWhile(CustomList(1, 2, 3), (a: Int) => a % 2 == 0) // CustomList(1, 2, 3)

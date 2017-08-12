@@ -23,6 +23,9 @@ object CustomList {
     else CustomCons(as.head, apply(as.tail: _*))
   }
 
+  // See exercise 3.9
+  def length[A](as: CustomList[A]): Int = foldRight(as, 0)((_, length) => length + 1)
+
   // See exercise 3.10
   @tailrec
   def foldLeft[A, B](as: CustomList[A], z: B)(f: (B, A) => B): B = as match {
@@ -41,4 +44,19 @@ object CustomList {
   // See exercise 3.14
   def append[A](as: CustomList[A], xs: CustomList[A]): CustomList[A] =
     foldRightTailRec(as, xs)(CustomCons(_, _))
+
+  // See exercise 3.20
+  def flatMap[A,B](as: CustomList[A])(f: A => CustomList[B]): CustomList[B] = {
+    foldRightTailRec(as, CustomNil: CustomList[B])((a, b) => append(f(a), b))
+  }
+
+  // See exercise 3.23
+  def zipWith[A, B, C](xs1: CustomList[A], xs2: CustomList[B])(combine: (A, B) => C): CustomList[C] = {
+    def loop(ys1: CustomList[A], ys2: CustomList[B], acc: CustomList[C]): CustomList[C] = (ys1, ys2) match {
+      case (CustomCons(h1, t1), CustomCons(h2, t2)) => loop(t1, t2, CustomCons(combine(h1, h2), acc))
+      case _ => acc
+    }
+
+    reverse(loop(xs1, xs2, CustomNil))
+  }
 }
